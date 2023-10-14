@@ -36,7 +36,7 @@
 							</div>
 							<div class="col-md-6 text-right">
 								<p><strong>E-Mail:</strong> <span th:text="${entry.email}"></span></p>
-								<button class="btn btn-sm btn-primary" onclick="editEntry(${entry.id})">Bearbeiten</button>
+								<button class="btn btn-sm btn-primary" onclick="editEntry($,entry.id,)">Bearbeiten</button>
 							</div>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 				// Hier können Sie den Code für die Bearbeitung eines Beitrags implementieren
 				alert('Bearbeiten des Beitrags mit ID ' + entryId);
 
-				window.location.href = 'editEntry.html'; // Ändern Sie den URL-Namen entsprechend
+				window.location.href = '/home/oeblivion/Dokumente/SWTProjekt/guestbook/src/main/resources/templates/editEntry.html'; // Ändern Sie den URL-Namen entsprechend
 			}
 
 		</script>
