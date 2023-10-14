@@ -30,11 +30,17 @@
 								<span class="fas fa-times"></span>
 							</button>
 						</form>
-						<h4 th:text="${index} + '. ' + ${entry.name}" class="card-title">1. Posting</h4>
+						<div class="row">
+							<div class="col-md-6">
+								<h4 th:text="${index} + '. ' + ${entry.name}" class="card-title">1. Posting</h4>
+							</div>
+							<div class="col-md-6 text-right">
+								<p><strong>E-Mail:</strong> <span th:text="${entry.email}"></span></p>
+							</div>
+						</div>
 					</div>
 					<div class="card-body">
 						<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
-						<p><strong>E-Mail:</strong> <span th:text="${entry.email}"></span></p>
 					</div>
 					<div class="card-footer">
 						<footer class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>
