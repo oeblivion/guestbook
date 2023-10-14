@@ -53,12 +53,12 @@
 		<form method="post" role="form" class="gb-form" id="form" hx:post="@{/guestbook}" hx-target="#entries" hx-swap="beforeend" _="on entryAdded me.reset()" th:action="@{/guestbook}" th:object="${form}">
 			<div class="form-group">
 				<label for="name" th:text="#{guestbook.form.name}">Name</label><br /> 
-				<input class="form-control" type="text" th:field="*{name}" th:errorclass="is-invalid" required="required" />
+				<input class "form-control" type="text" th:field="*{name}" th:errorclass="is-invalid" required="required" />
 				<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:text="#{guestbook.form.name.required}">Please provide a name.</div> 
 			</div>
 			<div class="form-group">
 				<label for="email">E-Mail</label><br />
-				<input class="form-control" type="email" th:field="*{email}" th:errorclass="is-invalid" required="required" />
+				<input class "form-control" type="email" th:field="*{email}" th:errorclass="is-invalid" required="required" />
 				<div th:if="${#fields.hasErrors('email')}" class="invalid-feedback" th:text="#{guestbook.form.email.required}">Please provide an email.</div>
 			</div>
 			<div class="form-group">
@@ -71,12 +71,52 @@
 
 		<script>
 			function editEntry(entryId) {
-				// Hier können Sie den Code für die Bearbeitung eines Beitrags implementieren
-				alert('Bearbeiten des Beitrags mit ID ' + entryId);
+                // Hier können Sie den Code für die Bearbeitung eines Beitrags implementieren
+                var entry = document.getElementById("entry" + entryId);
+                var emailSpan = entry.querySelector(".email");
+                var textBlock = entry.querySelector(".entrytext");
+                var editButton = entry.querySelector(".edit-button");
 
-				window.location.href = '/home/oeblivion/Dokumente/SWTProjekt/guestbook/src/main/resources/templates/editEntry.html'; // Ändern Sie den URL-Namen entsprechend
-			}
+                var email = emailSpan.textContent;
+                var text = textBlock.textContent;
 
+                // Erstellen von Bearbeitungsfeldern
+                var emailInput = document.createElement("input");
+                emailInput.type = "email";
+                emailInput.value = email;
+                emailSpan.innerHTML = "";
+                emailSpan.appendChild(emailInput);
+
+                var textArea = document.createElement("textarea");
+                textArea.value = text;
+                textBlock.innerHTML = "";
+                textBlock.appendChild(textArea);
+
+                // Ändern des Bearbeiten-Buttons zu Speichern
+                editButton.innerHTML = "Speichern";
+                editButton.onclick = function () {
+                    saveEntry(entryId, emailInput.value, textArea.value);
+                };
+            }
+
+            function saveEntry(entryId, newEmail, newText) {
+                // Hier können Sie den Code zum Speichern des bearbeiteten Eintrags implementieren
+                // Möglicherweise möchten Sie eine AJAX-Anfrage senden, um die Änderungen an den Server zu übertragen.
+
+                // Zurücksetzen des Bearbeiten-Buttons und Anzeigen der neuen Daten
+                var entry = document.getElementById("entry" + entryId);
+                var emailSpan = entry.querySelector(".email");
+                var textBlock = entry.querySelector(".entrytext");
+                var editButton = entry.querySelector(".edit-button");
+
+                emailSpan.textContent = newEmail;
+                textBlock.textContent = newText;
+                GuestbookEntry.updateEntry(newText, newEmail);
+                editButton.innerHTML = "Bearbeiten";
+                editButton.onclick = function () {
+                    editEntry(entryId);
+                };
+            }
 		</script>
 	</body>
 </html>
