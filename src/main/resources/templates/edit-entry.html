@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eintrag bearbeiten</title>
+</head>
+<body>
+    <h1>Eintrag bearbeiten</h1>
+
+    <!-- Abschnitt 1: Name (nicht veränderbar) -->
+    <div id="name-section">
+        <label for="name">Name:</label>
+        <input type="text" id="name" value="" readonly>
+    </div>
+
+    <!-- Abschnitt 2: E-Mail und Text bearbeiten -->
+    <div id="edit-section">
+        <label for="email">E-Mail:</label>
+        <input type="email" id="email" value="">
+
+        <label for="text">Text:</label>
+        <textarea id="text" rows="4" cols="50"></textarea>
+    </div>
+
+    <!-- Button zum Speichern und Zurück zur Gästebuchseite -->
+    <button id="save-button" onclick="saveEntry()">Save Entry</button>
+
+    <script>
+        // JavaScript-Funktionen, um die Daten zu laden (ersetzen Sie diese mit Ihren vorhandenen Funktionen)
+        function getName() {
+            return GuestbookEntry.getName(); // Beispielwert, ersetzen Sie durch Ihre Implementierung
+        }
+
+        function getEmail() {
+            return GuestbookEntry.getEmail(); // Beispielwert, ersetzen Sie durch Ihre Implementierung
+        }
+
+        function getText() {
+            return GuestbookEntry.getText(); // Beispielwert, ersetzen Sie durch Ihre Implementierung
+        }
+
+        // Laden der Daten in die HTML-Felder beim Laden der Seite
+        document.getElementById("name").value = getName();
+        document.getElementById("email").value = getEmail(); // Fügen Sie die E-Mail aus der get-Funktion ein
+        document.getElementById("text").value = getText(); // Fügen Sie den Text aus der get-Funktion ein
+
+        function saveEntry() {
+            var emailInput = document.getElementById("email");
+            var textInput = document.getElementById("text");
+
+            // Rufen Sie die eingegebenen Werte ab
+            var Email = emailInput.value;
+            var Text = textInput.value;
+
+            GuestbookEntry.updateEntry(text, email)
+            window.location.href = "guestbook.html"; // Ändern Sie den URL-Namen entsprechend
+        }
+    </script>
+</body>
+</html>

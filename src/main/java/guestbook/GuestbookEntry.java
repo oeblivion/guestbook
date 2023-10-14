@@ -34,7 +34,9 @@ import org.springframework.util.Assert;
 class GuestbookEntry {
 
 	private @Id @GeneratedValue Long id;
-	private final String name, text , email;
+	private final String name;
+	private String text;
+	private String email;
 	private final LocalDateTime date;
 
 	/**
@@ -49,10 +51,22 @@ class GuestbookEntry {
 		Assert.hasText(text, "Text must not be null or empty!");
 		Assert.hasText(email, "email must not be null or empty!");
 
+		boolean isValidEmail = email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
+
+		if (isValidEmail) {
+			System.out.println("Die E-Mail-Adresse ist gültig.");
+		} else {
+			System.out.println("Die E-Mail-Adresse ist ungültig.");
+		}
 		this.name = name;
 		this.text = text;
 		this.email = email;
 		this.date = LocalDateTime.now();
+	}
+
+	public void updateEntry(String text, String email) {
+		this.text = text;
+		this.email = email;
 	}
 
 	@SuppressWarnings("unused")
